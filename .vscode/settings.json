@@ -77,6 +77,17 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "*.ipp": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "forward_list": "cpp",
+        "numeric": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "valarray": "cpp",
+        "filesystem": "cpp",
+        "regex": "cpp",
+        "__verbose_abort": "cpp",
+        "bit": "cpp",
+        "shared_mutex": "cpp",
+        "thread": "cpp"
     }
 }
