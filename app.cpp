@@ -6,7 +6,6 @@
 #include <string>
 #include <codecvt>
 #include <fstream>
-#include "libs/utf8.h"
 
 int done = 0;
 char *zErrMsg = 0;
@@ -77,16 +76,15 @@ int main() {
         }
 
         // Remove the comma from the last object
-        res.pop_back();
+        if (res.at(res.length() - 1) == ',') {
+            res.pop_back();
+        }
         // Close JSON array
         res += "]";
         // Replace all \n characters
         res = std::regex_replace(res, std::regex("\n"), "\\n");
 
-
-
-        std::string abc = "你好啊！";
-        return crow::response(abc);
+        return res;
     });
 
     app.port(18080).run();

@@ -1,0 +1,6 @@
+app.dSYM/
+test.dSYM/
+app
+app_old.cpp
+test.cpp
+test.sqlite
