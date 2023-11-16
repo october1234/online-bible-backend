@@ -4,3 +4,4 @@ app
 app_old.cpp
 test.cpp
 test.sqlite
+**/.DS_Store
