@@ -17,3 +17,4 @@ github-actions:
 	-std=c++17 \
 	-lsqlite3 \
 	-o app
+	chmod +x ./app
