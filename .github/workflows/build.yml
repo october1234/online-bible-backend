@@ -22,8 +22,47 @@ jobs:
       run: |
         make github-actions
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build Docker image
+      run: |
+        docker build -t online-bible .
+
+    - name: Save Docker image
+      run: |
+        docker save -o online-bible.tar online-bible
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: app
-        path: app
+        tag_name: ${{ github.run_id }}
+        release_name: Release ${{ github.run_id }}
+        body: "Some Release"
+        draft: false
+        prerelease: false
+
+    - name: Upload Executable
+      id: upload-executable
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: app
+        asset_name: app
+        asset_content_type: application/octet-stream
+
+    - name: Upload Docker Image
+      id: upload-docker-image
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: online-bible.tar
+        asset_name: online-bible.tar
+        asset_content_type: application/x-tar
