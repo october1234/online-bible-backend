@@ -33,6 +33,18 @@ int main() {
         fprintf(stderr, "Opened database successfully\n");
     }
 
+    CROW_ROUTE(app, "/")([]() {
+        return crow::mustache::load("/frontend/index.html").render();
+    });
+    CROW_ROUTE(app, "/index.js")([]() {
+        return crow::mustache::load("/frontend/index.js").render();
+    });
+    CROW_ROUTE(app, "/index.css")([]() {
+        return crow::mustache::load("/frontend/index.css").render();
+    });
+    CROW_ROUTE(app, "/vite.svg")([]() {
+        return crow::mustache::load("/frontend/vite.svg").render();
+    });
 
     CROW_ROUTE(app, "/api/get-verses/<int>/<int>")([](int book, int chapter){
         // std::string res;
@@ -87,7 +99,7 @@ int main() {
         return res;
     });
 
-    app.port(18080).run();
+    app.port(80).run();
     sqlite3_close(db);
     return 0;
 }

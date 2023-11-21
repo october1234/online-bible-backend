@@ -1,0 +1,29 @@
+name: C++ Build with Boost
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Boost libraries
+      run: |
+        sudo apt-get update
+        sudo apt-get install libboost-all-dev
+
+    - name: Build
+      run: |
+        make github-actions
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: app
+        path: app
