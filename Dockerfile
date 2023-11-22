@@ -1,9 +1,10 @@
-FROM scratch
+FROM alpine
 
-COPY ./app /app
-COPY ./frontend /frontend
+COPY ./app /online-bible/app
+COPY ./frontend /online-bible/frontend
+RUN chmod 777 /online-bible/app
 
 EXPOSE 80
 
-CMD [ "./app" ]
+CMD [ "/online-bible/app" ]
 

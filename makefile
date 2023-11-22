@@ -16,5 +16,6 @@ github-actions:
 	-I/usr/include/boost \
 	-std=c++17 \
 	-lsqlite3 \
+	-static \
 	-o app
 	chmod +x ./app
