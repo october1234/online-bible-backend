@@ -1,10 +1,12 @@
 FROM alpine
 
-COPY ./app /online-bible/app
-COPY ./frontend /online-bible/frontend
-RUN chmod 777 /online-bible/app
+WORKDIR /online-bible
+
+COPY ./app app
+COPY ./frontend frontend
+RUN chmod 777 app
 
 EXPOSE 80
 
-CMD [ "/online-bible/app" ]
+CMD [ "app" ]
 

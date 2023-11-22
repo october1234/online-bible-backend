@@ -34,16 +34,28 @@ int main() {
     }
 
     CROW_ROUTE(app, "/")([]() {
-        return crow::mustache::load("/frontend/index.html").render();
+        crow::response res;
+        res.set_static_file_info("frontend/index.html");
+        res.set_header("content-type", "text/html");
+        return res;
     });
     CROW_ROUTE(app, "/index.js")([]() {
-        return crow::mustache::load("/frontend/index.js").render();
+        crow::response res;
+        res.set_static_file_info("frontend/index.js");
+        res.set_header("content-type", "text/javascript");
+        return res;
     });
     CROW_ROUTE(app, "/index.css")([]() {
-        return crow::mustache::load("/frontend/index.css").render();
+        crow::response res;
+        res.set_static_file_info("frontend/index.css");
+        res.set_header("content-type", "text/css");
+        return res;
     });
     CROW_ROUTE(app, "/vite.svg")([]() {
-        return crow::mustache::load("/frontend/vite.svg").render();
+        crow::response res;
+        res.set_static_file_info("frontend/vite.svg");
+        res.set_header("content-type", "image/svg+xml");
+        return res;
     });
 
     CROW_ROUTE(app, "/api/get-verses/<int>/<int>")([](int book, int chapter){
